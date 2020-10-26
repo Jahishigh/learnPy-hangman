@@ -13,13 +13,13 @@ print(variable_print)
 # print une string avec une variable, utiliser +
 print("String " + nom_de_ma_variable + "\n")
 
+# déclarer plusieurs variables d'un coup
+a,b,c = 1,2,3
+print(a, b, c)
 # ----------------------STRING--------------------------
 
 # Toujours entourer une string avec ""
-# Pour créer une nouvelle ligne dans une string utiliser \n
-"String\nString\n"
-# Utiliser des fonctions avec les string, exemple :
-string_exemple = "Hello World\n"
+string_exemple = "Hello World"
 # Pour passer la string en lower case :
 string_exemple.lower()
 # Pour passer la string en upper case :
@@ -33,11 +33,26 @@ len(string_exemple)
 # Voir quel caractère à une position précise (renvoie H)
 # Ne pas oublier [] est un tableau et les tableau en python commence par 0
 print(string_exemple[0])
+# Découper une string fonctionne comme ça : [start:stop:stepover]
+# print une string d'un start à un stop
+print(string_exemple[0:6])
+# print une string en sautant des charactère
+print(string_exemple[0:6:2])
+# commencer au début jusqu'à x
+print(string_exemple[:5])
+# commencer de là jusqu'à la fin
+print(string_exemple[3:])
+# partir de la fin
+print(string_exemple[-3])
+# afficher à l'envers
+print(string_exemple[::-1])
 # Trouver la position d'un charactère dans la string avec index (renvoie 0 pour la première position)
 # Dans index, il faut préciser un paramètre
 string_exemple.index("H")
 # Index peut être utiliser avec un mot complet (renvoie 6, la position du premier charactère du mot complet
 string_exemple.index("Wor")
+# .find fait la même chose
+string_exemple.find("Wor")
 # Remplacer un charactère par un autre (avec 2 paramètres) :
 string_exemple.replace("World", "Planet Earth")
 # Pour créer une string avec plusieurs lignes, utiliser ''' '''
@@ -48,12 +63,31 @@ lignes
 
 print(multi_line_string)
 
+# formatted strings
+name = 'Johnny'
+age = 55
+print(f"hi {name} ! You are {age} years old !")
+# autre solution qui vient de python2, le .format
+print('hi {} you are {} years old'.format(name, age))
+# changer l'ordre d'apparition avec cette méthode
+print('hi {1} you are {0} years old'.format(name, age))
+# crée une variable à l'intérieur d'une string
+print('hi {new_name} you are {new_age} years old'.format(new_name='Bob', new_age=100))
+
+# ----------------------NUMBERS--------------------------
+# Pour créer une nouvelle ligne dans une string utiliser \n
+"String\nString\n"
+# Pour une tab
+"\t Tabulation activé"
+# Pour considérer que ce qui vient juste après est un string
+'J\'ai faim'
+
 # ----------------------NUMBERS--------------------------
 # Un nombre s'écrit sans ""
 print(2)
 # On peut utiliser des nombres négatif ou décimal :
-print(-2)
-print(2.35)
+print(-2)   # Ceci est un int
+print(2.35) # Ceci est un float
 # Faire des opérations basique :
 print(1 + 1)
 print(1 - 1)
@@ -98,6 +132,8 @@ print(int(num1) + float(num2))
 
 # ----------------------LIST AND 2D LIST--------------------------
 # Pour déclarer un tableau :
+array = []
+new_array = []
 # On peut mettre ce qu'on veut dans un tableau
 array = ["String", 5, True, input_du_user]
 # Pour afficher tous le tableau :
@@ -117,6 +153,8 @@ print(array)
 second_array = ["Second Tableau", 42, False]
 array.extend(second_array)
 print(array)
+# copier un tableau
+new_array = array[:]
 # Ajouter un élément à la fin de la liste
 array.append("Nouvel élément")
 # Ajouter un élément à une position précise (ce qui pousse les autres de 1 place
@@ -138,7 +176,14 @@ array.reverse()
 copie_de_array = array.copy()
 # Vider le tableau
 array.clear()
-# Pour créer une liste 2D, créer un tableau et mettez y plus de tableau pour un max de tableau
+# list unpacking
+d,e,f, *other = [1,2,3,4,5,6,7,8,9] #maintenant, d = 1, e = 2, f = 3, other = le reste
+# si on rajouter une autre varible après other d,e,f, *other, g    g = 9 mais other = 45678
+# si on rajoute une variable après other, il prend le dernier item
+# unpack enleve la variable de la liste et la stock dans la variable
+
+
+# Pour créer une liste 2D aussi appelé MATRIX, créer un tableau et mettez y plus de tableau pour un max de tableau
 # Ceci crée donc une tableau où l'on voit les lignes et les colonnes, ce qui va servir à appeler les éléments
 tableau_en_2d = [
     [1, 2, 3],
@@ -151,12 +196,39 @@ print(tableau_en_2d[0][0])
 # ----------------------TUPLES--------------------------
 # Les tuples sont dans listes dans lesquelles on ne peut rien modifier
 # Ni les éléments, ni l'ordre, rien
+# Elles sont pratique car elle charge plus rapidement dans le code qu'une liste
+# Elles peuvent aussi être des clé dans un dictionary
 new_tuples = ("Hello", 25, False)
 # Pour afficher un élément du tuple
 print(new_tuples[0])
 # Créer une liste de tuples
 liste_de_tuples = [(1, 2), (3, 4), (5, 6)]
 
+# ----------------------SET--------------------------
+# Collection d'item unique
+my_set = {1,2,3,4,5} # return 1,2,3,4,5 car c'est item unique, donc le deuxième 5 n'est pas affiché
+your_set = {4,5,6,7,8,9,10}
+# Pour ajouter dans un set
+my_set.add(2) # il sera dans le set, mais pas affiché car un 2 existe déjà
+# Pour changer une liste en set pour enlever les duplicate d'une liste
+my_list = [1,2,3,4,5,5]
+set(my_list) # return 1,2,3,4,5
+# Pour voir si quelque chose exite dans le set
+print(1 in my_set) #return True
+# .difference compare 2 set
+my_set.difference(your_set) #return 1,2,3 -> Il regarde your_set et voit qu'il manque 1,2,3 par rapport à lui
+# .discard enleve un élement d'un set
+my_set.discard(5) #enleve un élément dans le set -> ici return 1,2,3,4 si on print my_set
+# .difference_update enleve les différences entre 2 set
+my_set.difference_update(your_set) # return 1,2,3 et à supprimé 4 et 5 de my_set
+# .intersection donne les intersections entre 2 set
+my_set.intersection(your_set) # return 4,5
+print(my_set & your_set) # renvoi la même chose
+# .isdisjoint vérifie si les 2 set n'ont rien en commun
+my_set.isdisjoint() # renvoi False car 4,5 est en commun dans les deux
+# .union unie 2 set et enlève les duplicate et crée un nouveau set
+my_set.union(your_set) # renvoi 1,2,3,4,5,6,7,8,9,10
+print(my_set | your_set) # renvoi la même chose
 
 # ----------------------FONCTION--------------------------
 # Permet de mettre des bouts de code dans une fonction, et appeler cette fonctions plusieurs fois
@@ -219,21 +291,34 @@ if "ceci" == "ceci":
     print("Ceci est bien ceci")
 
 # ----------------------DICTIONARY--------------------------
-# Un dictionary permet d'associer une valeur à une autre
-# Par exemple une string et une string, ou une string et un int
+# Un dictionary permet d'associer une key à une valeur
+# A utiliser quand on a beaucoup d'information que ne doivent pas forcément être dans l'ordre comme dans une liste
+# Une key doit être immuable, donc par exemple une string, un int ou un bool
+# Mais on utilise princpalement des string pour être descriptif
 mon_dico = {
     "Jan": "Janvier",
     "Feb": "Fevrier",
     "Mar": "Mars",
     "Num": 5,
-    10: "Dix"
+    10: "Dix",
+    'tab': [1,2,3]
 }
 print(mon_dico["Feb"])
 print(mon_dico["Num"])
 # On peut aussi utiliser une fonction pour appeler une value du dico :
 print(mon_dico.get("Jan"))
+# pour voir si un dico a une key
+print(mon_dico.get("Avr"))
 # Si la value n'est pas dans le dico, on peut fournir une valeur de base en parametre pour prévenir de l'erreur
 print(mon_dico.get("Avr", "C'est pas dans le dico"))
+# pour copier un dictionary
+mon_dico2 = mon_dico.copy()
+# pour vider un dictionary
+mon_dico.clear()
+
+# autre moyen de faire un dictionary
+user = dict(name='john')
+
 
 # ----------------------WHILE--------------------------
 # While permet de boucler le code tant que sa condition n'est pas completé
@@ -446,6 +531,21 @@ class Math:
 print(Math.add5(5))
 Math.pr()
 
+# ----------------------MOT CLE UTILES--------------------------
+
+# in
+use_array = ['a', 'b', 'c', 'd']
+print('x' in use_array) #Renvoie False
+print('i' in 'hi my name is Ian') #Renvoie True
+
+# range
+print(list(range(1,100)))
+print(list(range(101)))
+
+# join
+new_phrase = ' '.join(['hi', 'my', 'name', 'is', 'jojo']) # va ajouter un espace après chaque item
+
+
 # ----------------------FONCTIONS UTILES--------------------------
 # type() donne le type de l'élément donné, ici l'exemple renvoie str
 print(type("Hello"))
@@ -458,3 +558,8 @@ def convert_to_array(string):
 
 def convert_to_string(array):
     return ', '.join(array)
+
+# None est utile pour montrer que quelque chose n'existe pas
+player_weapon = None
+
+# in fonctionne avec tous, string, tuple, list..
