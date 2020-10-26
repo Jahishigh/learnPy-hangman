@@ -18,7 +18,8 @@ def give_game_state(word_to_find):
     for letters in word_to_find:
         if letters == " ":
             game_state.append(" ")
-        game_state.append("_")
+        else:
+            game_state.append("_")
     return ''.join(game_state)
 
 def give_letter_pos(letter):
@@ -31,7 +32,6 @@ print("\n" * 100)
 convert_to_array(user_input)
 give_game_state(word_to_find)
 print(' '.join(game_state))
-
 
 while True:
     duplicate_letter = False
