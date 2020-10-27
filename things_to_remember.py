@@ -74,7 +74,7 @@ print('hi {1} you are {0} years old'.format(name, age))
 # crée une variable à l'intérieur d'une string
 print('hi {new_name} you are {new_age} years old'.format(new_name='Bob', new_age=100))
 
-# ----------------------NUMBERS--------------------------
+# ----------------------ESCAPE--------------------------
 # Pour créer une nouvelle ligne dans une string utiliser \n
 "String\nString\n"
 # Pour une tab
@@ -289,6 +289,22 @@ if 5 < 6:
 # Ou comparer des string
 if "ceci" == "ceci":
     print("Ceci est bien ceci")
+
+# ----------------------TERNARY OPERATOR--------------------------
+# One liner pour mettre des conditions True or False
+is_friend = True
+can_message = 'message allowed' if is_friend else "not allowed to message"
+print(can_message) # renvoi message allowed
+
+# ----------------------SHORT CIRCUITING--------------------------
+# Avec or, si le premier élément est True, le code va se rendre compte que la suite ne sert à rien et sauter le reste
+# pour aller vers le print direct. Ce qui évite donc au code des calcules inutile
+# and fonctionne de la même manière car si le premier ne répond pas à la condition, il s'arrête tout de suite
+is_friend = True
+is_user = True
+if is_friend or is_user:
+    print('best friend for ever')
+
 
 # ----------------------DICTIONARY--------------------------
 # Un dictionary permet d'associer une key à une valeur
@@ -563,3 +579,7 @@ def convert_to_string(array):
 player_weapon = None
 
 # in fonctionne avec tous, string, tuple, list..
+
+#Truthy and Falsy
+# Toute les value sont considéré comme True sauf les valeur vide comme None, 0, les listes, string, dict qui sont vide
+print(bool('123')) #renvoie True
